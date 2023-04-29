@@ -27,13 +27,24 @@ galleryRef.addEventListener('click', (evn) => {
     evn.preventDefault();
     const imgSrc = evn.target.parentNode.href;
     const imgAlt = evn.target.alt
-    const instance = basicLightbox.create(
-        `
+  const instance = basicLightbox.create(
+    `
     <img src="${imgSrc}" alt="${imgAlt}">
-`
-    )
+`,
+    {
+      onShow: (instance) => { document.addEventListener('keydown', closeModal) },
+      onClose: (instance) => { document.removeEventListener('keydown', closeModal) },
+    }
+  );
+  
+  function closeModal(evn) {
+    if (evn.code === 'Escape') {
+      instance.close()
+    }
+  }
+ 
   instance.show()
-  document.addEventListener('keydown', evn)
+
 });
 
 

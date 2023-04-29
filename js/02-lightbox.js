@@ -18,4 +18,10 @@ const addImg = galleryItems.map(item =>
 </li>`
 ).join("")
 
-galleryRef.insertAdjacentHTML("afterbegin", addImg)
+galleryRef.insertAdjacentHTML("afterbegin", addImg);
+
+galleryRef.addEventListener('click', (evn) => {
+  evn.preventDefault();
+var lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250});
+
+})
